@@ -1,137 +1,94 @@
-# WorkLog Daily Report Skill
+# Worklog Skills
 
 English | [简体中文](README.zh.md)
 
-A Codex skill for capturing what you did, preserving lost details, and turning reviewed work evidence into daily logs, weekly/monthly summaries, and performance-review material.
+**Remember what you actually did before the details disappear.**
 
-## The problem
+Worklog Skills is a Codex skill for turning messy daily work notes into reviewable work memory, daily reports, and long-term evidence for weekly reports, probation reviews, promotion packets, and performance summaries.
 
-The hard part of work reporting is often not the writing itself. It is remembering the work clearly enough after the moment has passed.
+## The Problems
 
-Common pain points:
+Work reporting usually fails before the writing starts.
 
-- You do not know what you actually did today or this week until you reconstruct it from memory, chat history, commits, meetings, and scattered notes.
-- Details disappear quickly: the first idea, why the plan changed, what was tried, who gave input, and how the work evolved.
-- When it is time for a weekly report, monthly summary, probation review, promotion packet, or performance review, the final result looks smaller than the real effort because exploration, communication, debugging, rework, and decisions are missing.
+1. **You forget what you did.** By the end of the day, Friday, or month-end, your work is scattered across memory, chats, meetings, commits, tickets, and half-written notes.
+2. **The process details disappear.** The first idea, failed attempts, why the plan changed, who gave input, and how the solution evolved are often gone by the time you write the report.
+3. **The final result looks smaller than the real effort.** Research, debugging, communication, rework, judgment, and tradeoffs are invisible unless you captured them when they happened.
 
-This skill is designed for the small moments when you can still remember the process:
+This skill is designed for small recording moments: five minutes on the subway, waiting for food delivery, walking back from a meeting, a quick recap before leaving work, or right after a useful conversation.
 
-- five minutes on the subway,
-- waiting for food delivery,
-- walking back from a meeting,
-- a quick recap before leaving work,
-- right after a useful conversation.
+## Solution
 
-Just dump the raw text first. The goal is not to inflate ordinary work, but to preserve the real process so later reports can show what happened, why it mattered, and how much work was actually involved.
+Dump rough notes first. Let the skill organize them into a human-reviewable draft before any final report is written.
 
-## Who is this for?
+| Problem | What the skill does |
+| --- | --- |
+| “I do not remember what I did.” | Preserves raw notes and groups fragmented work into reviewable work/process evidence. |
+| “I remembered a detail later.” | Moves late-mentioned details near the related task when the relationship is clear. |
+| “Names and projects are inconsistent.” | Aligns recurring names, projects, companies, and tools using lightweight prior context. |
+| “The model might guess wrong.” | Marks uncertain corrections instead of silently rewriting them. |
+| “Some context is social or environmental.” | Separates work evidence from social, gossip, life, emotion, and environment context. |
+| “I need this for probation or review.” | Adds an optional goal-relative comment after the approved daily report. |
 
-This is useful for:
-
-- interns and new hires during probation,
-- professionals who need daily/weekly/monthly reports,
-- people preparing promotion or performance-review material,
-- researchers, engineers, quants, analysts, and product people with fragmented daily progress,
-- anyone who thinks better by ?rambling first, organizing later.?
-
-## The solution
-
-The workflow is intentionally simple:
+The workflow is intentionally review-first:
 
 ```text
-raw text notes
-  -> cleaned review draft
-  -> user approval
+raw notes
+  -> rough cleaned review draft
+  -> explicit user approval
   -> daily worklog / weekly material / review evidence
+  -> optional goal-relative comment
 ```
 
-The skill does **not** transcribe audio.
+The skill does **not** transcribe audio. Use any speech-to-text or note-taking tool you like, then paste the raw text into Codex.
 
-Use whatever input method you like. For Chinese users, a practical workflow is:
+## The Five Features in Detail
 
-1. Use Doubao Input Method, system dictation, or another speech-to-text tool.
-2. Speak for a few minutes.
-3. Paste the raw text into Codex.
-4. Let this skill clean the notes into a review draft.
-5. Review once.
-6. Approve it.
-7. Generate the final daily report or reporting material.
+### 1. Lightweight term alignment
 
-## Why the review step matters
+The skill can normalize likely misrecognized coworker names, project names, company names, tools, and recurring concepts.
 
-This skill does not jump directly from raw notes to a polished report.
+Context priority:
 
-It first creates a **cleaned review draft**.
+```text
+approved daily/final notes
+  > explicit glossary-like context
+  > raw notes as weak supporting evidence
+```
 
-That draft is still close to the source, but more readable and lightly structured for review:
+Weak or raw-only matches are marked as uncertain. The skill does not require or promise a persistent glossary system.
 
-- long streams are split into paragraphs,
-- repeated filler is removed,
-- related items are grouped,
-- likely speech-recognition mistakes are corrected,
-- names of people, projects, teams, and companies are kept consistent with prior context,
-- uncertain corrections are marked instead of silently rewritten,
-- work evidence, social/environment context, and non-work notes are separated,
-- uncertain items and consistency corrections are marked for review.
+### 2. Rough semi-structured review drafts
 
-Only after explicit user approval does the skill write the final report.
+The cleaned draft is not a polished report. It is a rough review artifact that helps you check whether the meaning is right.
 
-This protects the most important thing: **your meaning should not be changed by the summarizer.**
+Typical lanes:
 
-## Design principles
+- Work / process evidence
+- Communication / collaboration context
+- Non-work / social / environment context
+- Uncertain items
+- Consistency corrections
 
-### 1. Raw notes are evidence
+### 3. Uncertainty marking
 
-Raw notes should be backed up and treated as source material. The skill should never beautify raw notes in place.
+If a correction, name match, date, cause, or conclusion is uncertain, it is labeled for review instead of hidden inside fluent prose.
 
-### 2. Clean first, report second
+### 4. Work and non-work context separation
 
-A daily report should be based on reviewed notes, not on an unchecked model interpretation of messy input.
+Real notes include work, social context, mood, gossip, environment signals, and personal reflection. The skill keeps these separated so professional reports stay clean, while useful context can still inform advice.
 
-### 3. Preserve meaning before polish
+### 5. Goal-relative comments
 
-The skill may improve readability, but it must not invent facts, dates, metrics, decisions, blockers, or outcomes.
+After an approved daily report, the skill can add a short comment for goals such as probation conversion, quarterly review, annual review, or promotion preparation.
 
-### 4. Fit workplace scenarios
+The comment separates:
 
-The default output is designed for professional worklogs:
+- evidence observed today,
+- assessment,
+- risk / gap,
+- suggested next action.
 
-- what was done,
-- what was learned,
-- who was involved,
-- what decisions were made,
-- what blockers appeared,
-- what should happen next,
-- what evidence may be useful for weekly/monthly/performance review.
-
-### 5. Keep non-work notes, but classify them
-
-Real raw notes often contain life, mood, ideas, or reflection. The skill can keep them, but should label them clearly instead of mixing them into a professional report.
-
-### 6. Maintain consistency across time
-
-Worklogs are cumulative. If a coworker, project, company, tool, or recurring concept has appeared before, the skill should use that existing context to correct likely recognition mistakes and keep naming consistent.
-
-For example, if prior notes mention `Alice Zhang` and the new raw text contains a likely misheard variant, the cleaned draft may normalize it to `Alice Zhang` and optionally record the correction. When the match is uncertain, the skill should flag it instead of guessing.
-
-This is a skill responsibility at the review stage, not uncontrolled automation. The skill uses lightweight context from approved notes or glossary-like material when available; it does not require or promise a persistent glossary system.
-
-### 7. Comment relative to the user's goal
-
-After an approved daily report, the skill can add a short goal-relative comment when a goal is available, such as probation conversion, a quarterly review, an annual report, or promotion preparation.
-
-The comment should separate evidence, assessment, risk/gap, and suggested next action. It must not infer promotion probability, manager expectations, or private facts not supported by approved notes. If no goal is provided, the goal comment should be omitted or clearly marked as `Goal: not provided`.
-
-## Automation boundary
-
-This skill can help generate daily, weekly, monthly, and review material, but it should not silently publish or overwrite final reports.
-
-Recommended responsibility split:
-
-- The skill cleans raw notes and drafts reports.
-- The user approves cleaned notes and important final outputs.
-- Daily reports can be generated after approval.
-- Weekly/monthly/review reports should be generated from approved daily material, not directly from unreviewed raw notes.
+It must not infer promotion probability, manager expectations, or private facts not supported by approved notes. If no goal is available, the comment is omitted or marked `Goal: not provided`.
 
 ## Install
 
@@ -153,15 +110,15 @@ User-global installation on Windows:
 %USERPROFILE%/.codex/skills/worklog-daily-report/
 ```
 
-Then ask Codex something like:
+Then ask Codex:
 
 ```text
-Organize these raw notes into a daily worklog.
+Organize these raw notes into a daily worklog. My goal is probation review.
 ```
 
 The skill should first return a cleaned review draft and wait for approval.
 
-## Repository layout
+## Repository Layout
 
 ```text
 worklog-daily-report/
@@ -172,18 +129,11 @@ worklog-daily-report/
     openai.yaml
 ```
 
-## Open-source safety
+## Open-source Safety
 
-The skill itself is generic. Do not publish private worklog data with it.
+The skill is generic. Do not publish private worklog data with it.
 
-Avoid committing:
-
-- employer names,
-- manager names,
-- confidential project details,
-- compensation,
-- trading/strategy details,
-- personal performance records.
+Avoid committing employer names, manager/coworker names, confidential project details, compensation, trading/strategy details, or personal performance records.
 
 ## License
 
