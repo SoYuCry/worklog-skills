@@ -1,4 +1,0 @@
-interface:
-  display_name: "WorkLog Daily Report"
-  short_description: "Turn raw notes into reviewed worklogs"
-  default_prompt: "Organize these raw notes into a cleaned review draft first, then wait for approval before writing the daily report."

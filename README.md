@@ -95,8 +95,10 @@ It must not infer promotion probability, manager expectations, or private facts 
 Copy the skill folder into a Codex skills directory:
 
 ```text
-worklog-daily-report/
+skills/worklog-daily-report/
 ```
+
+Install by copying `skills/worklog-daily-report/` into a Codex skills directory.
 
 Project-local installation:
 
@@ -121,12 +123,11 @@ The skill should first return a cleaned review draft and wait for approval.
 ## Repository Layout
 
 ```text
-worklog-daily-report/
-  SKILL.md
-  references/
-    templates.md
-  agents/
-    openai.yaml
+skills/
+  worklog-daily-report/
+    SKILL.md
+    references/
+      templates.md
 ```
 
 ## Open-source Safety

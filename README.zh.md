@@ -92,11 +92,13 @@ comment 会区分：
 
 ## 安装
 
-把 skill 文件夹复制到 Codex skills 目录：
+仓库内的 skill 路径是：
 
 ```text
-worklog-daily-report/
+skills/worklog-daily-report/
 ```
+
+安装时把 `skills/worklog-daily-report/` 复制到 Codex skills 目录。
 
 项目内安装：
 
@@ -121,12 +123,11 @@ Windows 用户全局安装：
 ## 仓库结构
 
 ```text
-worklog-daily-report/
-  SKILL.md
-  references/
-    templates.md
-  agents/
-    openai.yaml
+skills/
+  worklog-daily-report/
+    SKILL.md
+    references/
+      templates.md
 ```
 
 ## 开源安全
