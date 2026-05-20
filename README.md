@@ -4,13 +4,13 @@ English | [简体中文](README.zh.md)
 
 **Remember what you actually did before the details disappear.**
 
-Worklog Skills is a Codex skill for turning messy daily work notes into reviewable work memory, daily reports, and long-term evidence for weekly reports, probation reviews, promotion packets, and performance summaries.
+Worklog Skills is a Codex skill for turning messy daily work notes into reviewable work memory, daily logs, and evidence you can reuse for updates, weekly reports, papers, reviews, and performance summaries.
 
 ## The Problems
 
 Work reporting usually fails before the writing starts.
 
-1. **You forget what you did.** By the end of the day, Friday, or month-end, your work is scattered across memory, chats, meetings, commits, tickets, and half-written notes.
+1. **You forget what you did.** By the end of the day, Friday, or month-end, your work is scattered across memory, chats, meetings, commits, notes, and half-written thoughts.
 2. **The process details disappear.** The first idea, failed attempts, why the plan changed, who gave input, and how the solution evolved are often gone by the time you write the report.
 3. **The final result looks smaller than the real effort.** Research, debugging, communication, rework, judgment, and tradeoffs are invisible unless you captured them when they happened.
 
@@ -79,7 +79,7 @@ Real notes include work, social context, mood, gossip, environment signals, and 
 
 ### 5. Goal-relative comments
 
-After an approved daily report, the skill can add a short comment for goals such as probation conversion, quarterly review, annual review, or promotion preparation.
+After an approved daily report, the skill can add a short comment for goals such as probation conversion, quarterly review, annual review, promotion preparation, lab meetings, or paper progress.
 
 The comment separates:
 
@@ -113,7 +113,7 @@ User-global installation on Windows:
 Then ask Codex:
 
 ```text
-Organize these raw notes into a daily worklog. My goal is probation review.
+Organize these raw notes into a daily worklog. My goal is getting promoted and paid more.
 ```
 
 The skill should first return a cleaned review draft and wait for approval.
