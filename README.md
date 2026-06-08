@@ -92,35 +92,49 @@ It must not infer promotion probability, manager expectations, or private facts 
 
 ## Install
 
-### Codex CLI
+### Option A: Plugin marketplace (best when available)
 
-#### Via Skill Installer (in a Codex session)
+If your agent supports plugin marketplaces, install it directly from this repository:
 
-Ask Codex:
+```text
+/plugin marketplace add SoYuCry/worklog-skills
+/plugin install worklog-skills@worklog-skills
+```
+
+This repository includes plugin metadata for marketplace-style installs:
+
+```text
+.claude-plugin/
+.codex-plugin/
+```
+
+Restart your agent after installation if the skill does not appear immediately.
+
+### Option B: Codex Skill Installer
+
+In a Codex session, ask:
 
 ```text
 Install the worklog-daily-report skill from SoYuCry/worklog-skills
 ```
 
-Restart Codex after installation so the new skill is discovered.
+This is the recommended Codex path because it delegates the long install command to Codex.
 
-#### Command Line
+### Option C: Command line fallback
 
 ```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo SoYuCry/worklog-skills \
-  --path skills/worklog-daily-report
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
 ```
 
-On Windows PowerShell, use the same script from your Codex home directory:
+Restart Codex after installation so the new skill is discovered.
+
+Windows PowerShell:
 
 ```powershell
-python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" `
-  --repo SoYuCry/worklog-skills `
-  --path skills/worklog-daily-report
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
 ```
 
-#### Manual Install
+### Option D: Manual install
 
 ```bash
 git clone https://github.com/SoYuCry/worklog-skills.git /tmp/worklog-skills
@@ -157,6 +171,11 @@ Project-local installation is useful when the skill should only apply to one wor
 ## Repository Layout
 
 ```text
+.claude-plugin/
+  marketplace.json
+  plugin.json
+.codex-plugin/
+  plugin.json
 skills/
   worklog-daily-report/
     SKILL.md

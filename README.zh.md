@@ -92,35 +92,49 @@ comment 会区分：
 
 ## 安装
 
-### Codex CLI
+### 方式 A：Plugin marketplace（可用时最优雅）
 
-#### 方式 A：在 Codex 会话里使用 Skill Installer
+如果你的 agent 支持 plugin marketplace，可以直接从这个仓库安装：
 
-对 Codex 说：
+```text
+/plugin marketplace add SoYuCry/worklog-skills
+/plugin install worklog-skills@worklog-skills
+```
+
+仓库里已经包含 marketplace / plugin metadata：
+
+```text
+.claude-plugin/
+.codex-plugin/
+```
+
+如果安装后没有立刻出现，重启 agent / Codex。
+
+### 方式 B：Codex Skill Installer
+
+在 Codex 会话里直接说：
 
 ```text
 Install the worklog-daily-report skill from SoYuCry/worklog-skills
 ```
 
-安装后重启 Codex，让新 skill 被发现。
+这是推荐的 Codex 安装方式，因为它会把比较长的命令交给 Codex 自己处理。
 
-#### 方式 B：命令行安装
+### 方式 C：命令行兜底安装
 
 ```bash
-python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo SoYuCry/worklog-skills \
-  --path skills/worklog-daily-report
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
 ```
 
 Windows PowerShell：
 
 ```powershell
-python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" `
-  --repo SoYuCry/worklog-skills `
-  --path skills/worklog-daily-report
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
 ```
 
-#### 方式 C：手动安装
+安装后重启 Codex，让新 skill 被发现。
+
+### 方式 D：手动安装
 
 ```bash
 git clone https://github.com/SoYuCry/worklog-skills.git /tmp/worklog-skills
@@ -157,6 +171,11 @@ Copy-Item -Recurse -Force "$env:TEMP\worklog-skills\skills\worklog-daily-report\
 ## 仓库结构
 
 ```text
+.claude-plugin/
+  marketplace.json
+  plugin.json
+.codex-plugin/
+  plugin.json
 skills/
   worklog-daily-report/
     SKILL.md
