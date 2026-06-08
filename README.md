@@ -90,29 +90,66 @@ The comment separates:
 
 It must not infer promotion probability, manager expectations, or private facts not supported by approved notes. If no goal is available, the comment is omitted or marked `Goal: not provided`.
 
+## Voice input tip
+
+This skill does **not** transcribe audio. For Chinese voice-to-text, [Doubao Input Method](https://shurufa.doubao.com/) is a comfortable option to dictate a quick five-minute note and paste the text into Codex. It supports mobile and macOS; Windows is not supported yet.
+
 ## Install
 
-Copy the skill folder into a Codex skills directory:
+### Recommended: project-local Codex skill
+
+This skill is usually most useful inside one worklog or research repository, so the recommended setup is project-local:
 
 ```text
-skills/worklog-daily-report/
+<your-repo>/.codex/skills/worklog-daily-report/
 ```
 
-Install by copying `skills/worklog-daily-report/` into a Codex skills directory.
+From the target repository, install with the Codex Skill Installer:
 
-Project-local installation:
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report --dest .codex/skills
+```
+
+Windows PowerShell:
+
+```powershell
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo SoYuCry/worklog-skills --path skills/worklog-daily-report --dest .codex/skills
+```
+
+Restart Codex after installation.
+
+### Plugin marketplace, if available
+
+If your agent supports plugin marketplaces:
 
 ```text
-.codex/skills/worklog-daily-report/
+/plugin marketplace add SoYuCry/worklog-skills
+/plugin install worklog-skills@worklog-skills
 ```
 
-User-global installation on Windows:
+### Global Codex install
+
+If you want the skill available across projects, ask Codex:
 
 ```text
-%USERPROFILE%/.codex/skills/worklog-daily-report/
+Install the worklog-daily-report skill from SoYuCry/worklog-skills
 ```
 
-Then ask Codex:
+Or run:
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
+```
+
+### Manual install
+
+```bash
+git clone https://github.com/SoYuCry/worklog-skills.git /tmp/worklog-skills
+mkdir -p .codex/skills/worklog-daily-report
+cp -r /tmp/worklog-skills/skills/worklog-daily-report/* .codex/skills/worklog-daily-report/
+```
+
+After installation, ask:
 
 ```text
 Organize these raw notes into a daily worklog. My goal is getting promoted and paid more.
@@ -123,6 +160,11 @@ The skill should first return a cleaned review draft and wait for approval.
 ## Repository Layout
 
 ```text
+.claude-plugin/
+  marketplace.json
+  plugin.json
+.codex-plugin/
+  plugin.json
 skills/
   worklog-daily-report/
     SKILL.md

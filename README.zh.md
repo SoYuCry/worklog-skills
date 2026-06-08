@@ -90,29 +90,66 @@ comment 会区分：
 
 它不能推断“能不能转正”、manager 期待或没有证据支持的私人信息。如果没有目标，就省略，或标注 `Goal: not provided`。
 
+## 语音输入建议
+
+这个 skill **不负责语音转文字**。如果你主要用中文碎碎念，推荐先用 [豆包输入法](https://shurufa.doubao.com/) 语音转文字，再把文本贴给 Codex。它比较适合地铁上、等外卖时快速说五分钟；目前支持手机和 macOS，Windows 暂不支持。
+
 ## 安装
 
-仓库内的 skill 路径是：
+### 推荐：安装到特定 repo
+
+这个 skill 的专用性比较强，通常最适合放在你的 worklog / research repo 内：
 
 ```text
-skills/worklog-daily-report/
+<your-repo>/.codex/skills/worklog-daily-report/
 ```
 
-安装时把 `skills/worklog-daily-report/` 复制到 Codex skills 目录。
+在目标 repo 里运行：
 
-项目内安装：
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report --dest .codex/skills
+```
+
+Windows PowerShell：
+
+```powershell
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo SoYuCry/worklog-skills --path skills/worklog-daily-report --dest .codex/skills
+```
+
+安装后重启 Codex。
+
+### Plugin marketplace（如果可用）
+
+如果你的 agent 支持 plugin marketplace：
 
 ```text
-.codex/skills/worklog-daily-report/
+/plugin marketplace add SoYuCry/worklog-skills
+/plugin install worklog-skills@worklog-skills
 ```
 
-Windows 用户全局安装：
+### 全局 Codex 安装
+
+如果你想跨项目使用，可以对 Codex 说：
 
 ```text
-%USERPROFILE%/.codex/skills/worklog-daily-report/
+Install the worklog-daily-report skill from SoYuCry/worklog-skills
 ```
 
-然后对 Codex 说：
+或者运行：
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
+```
+
+### 手动安装
+
+```bash
+git clone https://github.com/SoYuCry/worklog-skills.git /tmp/worklog-skills
+mkdir -p .codex/skills/worklog-daily-report
+cp -r /tmp/worklog-skills/skills/worklog-daily-report/* .codex/skills/worklog-daily-report/
+```
+
+安装后对 Codex 说：
 
 ```text
 帮我把这些 raw notes 整理成 daily worklog。我的目标是升职加薪。
@@ -123,6 +160,11 @@ Windows 用户全局安装：
 ## 仓库结构
 
 ```text
+.claude-plugin/
+  marketplace.json
+  plugin.json
+.codex-plugin/
+  plugin.json
 skills/
   worklog-daily-report/
     SKILL.md
