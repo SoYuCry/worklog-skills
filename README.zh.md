@@ -92,19 +92,24 @@ comment 会区分：
 
 ## 语音输入建议
 
-这个 skill **不负责语音转文字**。如果你主要用中文碎碎念，推荐先用 [豆包输入法](https://shurufa.doubao.com/) 语音转文字，再把文本贴给 Codex。它比较适合地铁上、等外卖时快速说五分钟；目前支持手机和 macOS，Windows 暂不支持。
+这个 skill **不负责语音转文字**，但很适合接在听写之后做 review 和纠错。
+
+- 快速中文口述：推荐 [豆包输入法](https://shurufa.doubao.com/)，适合地铁上、等外卖、会后走回工位时随手记一段，然后粘贴给 Codex。
+- 本地录音转写：如果是会议、讨论或更长的录音，可以看看 [FunASR SenseVoiceSmall](https://github.com/FunAudioLLM/SenseVoice)。它 CPU 也能跑，适合先本地转成粗糙文本再交给 Codex review。局限是不能稳定区分说话人，所以转写结果要当成 rough source。
+
+Codex 可以在 review 阶段帮你纠正常见识别错误、对齐人名和项目名，并把不确定的地方标出来。上下文和已确认的日报越多，review 时对专用名词和你的表达习惯会越准。
 
 ## 安装
 
 ### 推荐：安装到特定 repo
 
-这个 skill 的专用性比较强，通常最适合放在你的 worklog / research repo 内：
+这个 skill 通常最适合放在一个专门的 worklog 或 research repo 里，所以推荐用项目内安装：
 
 ```text
 <your-repo>/.codex/skills/worklog-daily-report/
 ```
 
-在目标 repo 里运行：
+在目标 repo 里运行 Codex Skill Installer：
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report --dest .codex/skills
@@ -118,18 +123,9 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-s
 
 安装后重启 Codex。
 
-### Plugin marketplace（如果可用）
-
-如果你的 agent 支持 plugin marketplace：
-
-```text
-/plugin marketplace add SoYuCry/worklog-skills
-/plugin install worklog-skills@worklog-skills
-```
-
 ### 全局 Codex 安装
 
-如果你想跨项目使用，可以对 Codex 说：
+如果你想让这个 skill 在多个项目里都可用，可以对 Codex 说：
 
 ```text
 Install the worklog-daily-report skill from SoYuCry/worklog-skills
@@ -160,11 +156,6 @@ cp -r /tmp/worklog-skills/skills/worklog-daily-report/* .codex/skills/worklog-da
 ## 仓库结构
 
 ```text
-.claude-plugin/
-  marketplace.json
-  plugin.json
-.codex-plugin/
-  plugin.json
 skills/
   worklog-daily-report/
     SKILL.md

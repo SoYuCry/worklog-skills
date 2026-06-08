@@ -92,7 +92,12 @@ It must not infer promotion probability, manager expectations, or private facts 
 
 ## Voice input tip
 
-This skill does **not** transcribe audio. For Chinese voice-to-text, [Doubao Input Method](https://shurufa.doubao.com/) is a comfortable option to dictate a quick five-minute note and paste the text into Codex. It supports mobile and macOS; Windows is not supported yet.
+This skill does **not** transcribe audio, but it works well after speech-to-text.
+
+- For quick Chinese dictation, [Doubao Input Method](https://shurufa.doubao.com/) is a comfortable way to capture a five-minute note on the go and paste the text into Codex.
+- For local meeting recordings or longer audio, consider [FunASR SenseVoiceSmall](https://github.com/FunAudioLLM/SenseVoice). It can run on CPU and is suitable when you want local transcription before review. It does not separate speakers, so treat the transcript as rough source material.
+
+After transcription, Codex can review, correct likely recognition mistakes, align recurring names/projects, and mark uncertain parts. As your approved worklog context grows, these review corrections should become more accurate.
 
 ## Install
 
@@ -117,15 +122,6 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-s
 ```
 
 Restart Codex after installation.
-
-### Plugin marketplace, if available
-
-If your agent supports plugin marketplaces:
-
-```text
-/plugin marketplace add SoYuCry/worklog-skills
-/plugin install worklog-skills@worklog-skills
-```
 
 ### Global Codex install
 
@@ -160,11 +156,6 @@ The skill should first return a cleaned review draft and wait for approval.
 ## Repository Layout
 
 ```text
-.claude-plugin/
-  marketplace.json
-  plugin.json
-.codex-plugin/
-  plugin.json
 skills/
   worklog-daily-report/
     SKILL.md
