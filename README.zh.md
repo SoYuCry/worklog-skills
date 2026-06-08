@@ -90,83 +90,72 @@ comment 会区分：
 
 它不能推断“能不能转正”、manager 期待或没有证据支持的私人信息。如果没有目标，就省略，或标注 `Goal: not provided`。
 
+## 语音输入建议
+
+这个 skill **不负责语音转文字**。如果你主要用中文碎碎念，推荐先用 [豆包输入法](https://shurufa.doubao.com/) 语音转文字，再把文本贴给 Codex。它比较适合地铁上、等外卖时快速说五分钟；目前支持手机和 macOS，Windows 暂不支持。
+
 ## 安装
 
-### 方式 A：Plugin marketplace（可用时最优雅）
+### 推荐：安装到特定 repo
 
-如果你的 agent 支持 plugin marketplace，可以直接从这个仓库安装：
+这个 skill 的专用性比较强，通常最适合放在你的 worklog / research repo 内：
+
+```text
+<your-repo>/.codex/skills/worklog-daily-report/
+```
+
+在目标 repo 里运行：
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report --dest .codex/skills
+```
+
+Windows PowerShell：
+
+```powershell
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo SoYuCry/worklog-skills --path skills/worklog-daily-report --dest .codex/skills
+```
+
+安装后重启 Codex。
+
+### Plugin marketplace（如果可用）
+
+如果你的 agent 支持 plugin marketplace：
 
 ```text
 /plugin marketplace add SoYuCry/worklog-skills
 /plugin install worklog-skills@worklog-skills
 ```
 
-仓库里已经包含 marketplace / plugin metadata：
+### 全局 Codex 安装
 
-```text
-.claude-plugin/
-.codex-plugin/
-```
-
-如果安装后没有立刻出现，重启 agent / Codex。
-
-### 方式 B：Codex Skill Installer
-
-在 Codex 会话里直接说：
+如果你想跨项目使用，可以对 Codex 说：
 
 ```text
 Install the worklog-daily-report skill from SoYuCry/worklog-skills
 ```
 
-这是推荐的 Codex 安装方式，因为它会把比较长的命令交给 Codex 自己处理。
-
-### 方式 C：命令行兜底安装
+或者运行：
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
 ```
 
-Windows PowerShell：
-
-```powershell
-python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
-```
-
-安装后重启 Codex，让新 skill 被发现。
-
-### 方式 D：手动安装
+### 手动安装
 
 ```bash
 git clone https://github.com/SoYuCry/worklog-skills.git /tmp/worklog-skills
-mkdir -p ~/.codex/skills/worklog-daily-report
-cp -r /tmp/worklog-skills/skills/worklog-daily-report/* ~/.codex/skills/worklog-daily-report/
+mkdir -p .codex/skills/worklog-daily-report
+cp -r /tmp/worklog-skills/skills/worklog-daily-report/* .codex/skills/worklog-daily-report/
 ```
 
-Windows PowerShell：
-
-```powershell
-git clone https://github.com/SoYuCry/worklog-skills.git "$env:TEMP\worklog-skills"
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills\worklog-daily-report"
-Copy-Item -Recurse -Force "$env:TEMP\worklog-skills\skills\worklog-daily-report\*" "$env:USERPROFILE\.codex\skills\worklog-daily-report\"
-```
-
-安装后重启 Codex，然后对它说：
+安装后对 Codex 说：
 
 ```text
 帮我把这些 raw notes 整理成 daily worklog。我的目标是升职加薪。
 ```
 
 它应该先给你一版 cleaned review draft，并等待你确认。
-
-### 项目内使用
-
-如果只想让某一个 repo 使用这个 skill，也可以复制到项目内：
-
-```text
-<your-repo>/.codex/skills/worklog-daily-report/
-```
-
-项目内安装适合单个 workspace 专用；如果想跨项目使用，推荐安装到全局 `~/.codex/skills/`。
 
 ## 仓库结构
 

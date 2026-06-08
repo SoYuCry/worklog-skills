@@ -90,83 +90,72 @@ The comment separates:
 
 It must not infer promotion probability, manager expectations, or private facts not supported by approved notes. If no goal is available, the comment is omitted or marked `Goal: not provided`.
 
+## Voice input tip
+
+This skill does **not** transcribe audio. For Chinese voice-to-text, [Doubao Input Method](https://shurufa.doubao.com/) is a comfortable option to dictate a quick five-minute note and paste the text into Codex. It supports mobile and macOS; Windows is not supported yet.
+
 ## Install
 
-### Option A: Plugin marketplace (best when available)
+### Recommended: project-local Codex skill
 
-If your agent supports plugin marketplaces, install it directly from this repository:
+This skill is usually most useful inside one worklog or research repository, so the recommended setup is project-local:
+
+```text
+<your-repo>/.codex/skills/worklog-daily-report/
+```
+
+From the target repository, install with the Codex Skill Installer:
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report --dest .codex/skills
+```
+
+Windows PowerShell:
+
+```powershell
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo SoYuCry/worklog-skills --path skills/worklog-daily-report --dest .codex/skills
+```
+
+Restart Codex after installation.
+
+### Plugin marketplace, if available
+
+If your agent supports plugin marketplaces:
 
 ```text
 /plugin marketplace add SoYuCry/worklog-skills
 /plugin install worklog-skills@worklog-skills
 ```
 
-This repository includes plugin metadata for marketplace-style installs:
+### Global Codex install
 
-```text
-.claude-plugin/
-.codex-plugin/
-```
-
-Restart your agent after installation if the skill does not appear immediately.
-
-### Option B: Codex Skill Installer
-
-In a Codex session, ask:
+If you want the skill available across projects, ask Codex:
 
 ```text
 Install the worklog-daily-report skill from SoYuCry/worklog-skills
 ```
 
-This is the recommended Codex path because it delegates the long install command to Codex.
-
-### Option C: Command line fallback
+Or run:
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
 ```
 
-Restart Codex after installation so the new skill is discovered.
-
-Windows PowerShell:
-
-```powershell
-python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" --repo SoYuCry/worklog-skills --path skills/worklog-daily-report
-```
-
-### Option D: Manual install
+### Manual install
 
 ```bash
 git clone https://github.com/SoYuCry/worklog-skills.git /tmp/worklog-skills
-mkdir -p ~/.codex/skills/worklog-daily-report
-cp -r /tmp/worklog-skills/skills/worklog-daily-report/* ~/.codex/skills/worklog-daily-report/
+mkdir -p .codex/skills/worklog-daily-report
+cp -r /tmp/worklog-skills/skills/worklog-daily-report/* .codex/skills/worklog-daily-report/
 ```
 
-Windows PowerShell:
-
-```powershell
-git clone https://github.com/SoYuCry/worklog-skills.git "$env:TEMP\worklog-skills"
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills\worklog-daily-report"
-Copy-Item -Recurse -Force "$env:TEMP\worklog-skills\skills\worklog-daily-report\*" "$env:USERPROFILE\.codex\skills\worklog-daily-report\"
-```
-
-After installation, restart Codex and ask:
+After installation, ask:
 
 ```text
 Organize these raw notes into a daily worklog. My goal is getting promoted and paid more.
 ```
 
 The skill should first return a cleaned review draft and wait for approval.
-
-### Project-local use
-
-For a single repository, you can also copy the skill into that repo:
-
-```text
-<your-repo>/.codex/skills/worklog-daily-report/
-```
-
-Project-local installation is useful when the skill should only apply to one workspace. Global installation under `~/.codex/skills/` is better when you want the skill available across projects.
 
 ## Repository Layout
 
