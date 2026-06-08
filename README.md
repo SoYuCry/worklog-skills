@@ -92,33 +92,67 @@ It must not infer promotion probability, manager expectations, or private facts 
 
 ## Install
 
-Copy the skill folder into a Codex skills directory:
+### Codex CLI
+
+#### Via Skill Installer (in a Codex session)
+
+Ask Codex:
 
 ```text
-skills/worklog-daily-report/
+Install the worklog-daily-report skill from SoYuCry/worklog-skills
 ```
 
-Install by copying `skills/worklog-daily-report/` into a Codex skills directory.
+Restart Codex after installation so the new skill is discovered.
 
-Project-local installation:
+#### Command Line
 
-```text
-.codex/skills/worklog-daily-report/
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo SoYuCry/worklog-skills \
+  --path skills/worklog-daily-report
 ```
 
-User-global installation on Windows:
+On Windows PowerShell, use the same script from your Codex home directory:
 
-```text
-%USERPROFILE%/.codex/skills/worklog-daily-report/
+```powershell
+python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" `
+  --repo SoYuCry/worklog-skills `
+  --path skills/worklog-daily-report
 ```
 
-Then ask Codex:
+#### Manual Install
+
+```bash
+git clone https://github.com/SoYuCry/worklog-skills.git /tmp/worklog-skills
+mkdir -p ~/.codex/skills/worklog-daily-report
+cp -r /tmp/worklog-skills/skills/worklog-daily-report/* ~/.codex/skills/worklog-daily-report/
+```
+
+Windows PowerShell:
+
+```powershell
+git clone https://github.com/SoYuCry/worklog-skills.git "$env:TEMP\worklog-skills"
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills\worklog-daily-report"
+Copy-Item -Recurse -Force "$env:TEMP\worklog-skills\skills\worklog-daily-report\*" "$env:USERPROFILE\.codex\skills\worklog-daily-report\"
+```
+
+After installation, restart Codex and ask:
 
 ```text
 Organize these raw notes into a daily worklog. My goal is getting promoted and paid more.
 ```
 
 The skill should first return a cleaned review draft and wait for approval.
+
+### Project-local use
+
+For a single repository, you can also copy the skill into that repo:
+
+```text
+<your-repo>/.codex/skills/worklog-daily-report/
+```
+
+Project-local installation is useful when the skill should only apply to one workspace. Global installation under `~/.codex/skills/` is better when you want the skill available across projects.
 
 ## Repository Layout
 
