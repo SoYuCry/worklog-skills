@@ -12,14 +12,15 @@ The skill does **not** transcribe audio. Users are responsible for converting sp
 ## Core contract
 
 1. Preserve source meaning before polish. Do not invent facts, dates, metrics, names, decisions, blockers, or outcomes.
-2. Back up raw text when working in a repository with a `raw/` convention. Existing raw files are source evidence and must not be beautified or rewritten.
-3. Cleaned notes are an intermediate review artifact. Show them to the user first.
-4. Do not write or update final reports until the user explicitly approves the cleaned notes.
-5. Keep final outputs aligned to the repository's existing conventions, especially `README.md` when present.
-6. Keep reusable instructions generic. Do not bake private employer, manager, strategy, compensation, or personal-performance details into the skill.
-7. Maintain naming consistency across time. Use lightweight context to normalize likely recognition mistakes for coworkers, projects, teams, companies, tools, and recurring concepts, but mark uncertain matches instead of guessing.
-8. Separate work evidence from social, gossip, life, emotion, and environment context. Non-work context may inform advice only when clearly labeled and evidence-bound.
-9. Goal-relative comments are optional and evidence-based. Provide them only after cleaned-note approval and final daily report generation, and never infer performance status, manager expectations, promotion probability, or private facts not in evidence.
+2. Preserve judgment shape before summarizing. When reviewing meeting notes or feedback, keep the speaker's concrete reasoning structure (e.g. "ideal is a full curve; two ends would be meaningful; only the middle works is weaker") instead of replacing it with generic research-risk language. Clearly separate direct quote, close paraphrase, and the agent's own inference; never attribute the agent's extrapolation to the speaker.
+3. Back up raw text when working in a repository with a `raw/` convention. Existing raw files are source evidence and must not be beautified or rewritten.
+4. Cleaned notes are an intermediate review artifact. Show them to the user first.
+5. Do not write or update final reports until the user explicitly approves the cleaned notes.
+6. Keep final outputs aligned to the repository's existing conventions, especially `README.md` when present.
+7. Keep reusable instructions generic. Do not bake private employer, manager, strategy, compensation, or personal-performance details into the skill.
+8. Maintain naming consistency across time. Use lightweight context to normalize likely recognition mistakes for coworkers, projects, teams, companies, tools, and recurring concepts, but mark uncertain matches instead of guessing.
+9. Separate work evidence from social, gossip, life, emotion, and environment context. Non-work context may inform advice only when clearly labeled and evidence-bound.
+10. Goal-relative comments are optional and evidence-based. Provide them only after cleaned-note approval and final daily report generation, and never infer performance status, manager expectations, promotion probability, or private facts not in evidence.
 
 ## Trigger interpretation
 
@@ -52,6 +53,7 @@ Create a cleaned draft for user review. This draft should be rough, semi-structu
 Cleaning rules:
 
 - Preserve original intent and chronology.
+- For meeting reviews, preserve the speaker's original reasoning shape and decision logic. Do not compress concrete feedback into generic abstractions if the concrete shape matters. If adding interpretation, label it as `我的理解 / 推断` instead of writing it as the speaker's feedback.
 - Use rough semi-structured sections or bullets so the user can quickly scan and correct the draft.
 - Prefer these review lanes when relevant: work/process evidence; communication/collaboration context; non-work/social/environment context; uncertain items; consistency corrections.
 - Keep the draft slightly unfinished: do not make it sound like a polished daily report, final conclusion, or performance-review narrative.
@@ -64,6 +66,7 @@ Cleaning rules:
 - Correct likely recognition or wording mistakes only when context makes the correction likely.
 - Normalize likely misrecognized names of people, projects, teams, companies, tools, and recurring concepts using lightweight context. Prefer approved daily/final notes over raw notes; raw-only matches are weak evidence.
 - Mark uncertain corrections instead of silently changing meaning.
+- When converting ASR dialogue into review notes, prefer close paraphrase for important feedback. Preserve contrast words and structural relations such as "ideal vs current", "if A then meaningful, but current is B", "not direct rejection, needs more thought". Do not replace these with broad claims like "sample is small", "confidence is low", or "risk of overfitting" unless the speaker said that or the note labels it as the agent's analysis.
 - Keep work and non-work notes, but classify them clearly.
 - Separate factual work progress from interpretation, emotion, social context, environment signals, and future plans.
 - Do not over-compress; the cleaned draft is still source material for human review, not the final report.
